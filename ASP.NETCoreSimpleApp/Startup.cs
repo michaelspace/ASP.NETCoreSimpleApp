@@ -2,8 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ASP.NETCoreSimpleApp.Data;
+using ASP.NETCoreSimpleApp.Data.Interfaces;
+using ASP.NETCoreSimpleApp.Data.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -21,6 +25,13 @@ namespace ASP.NETCoreSimpleApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // for dependency injection container to know how to creacte MovieRentalDbContext
+            services.AddDbContext<MovieRentalDbContext>(options => options.UseInMemoryDatabase("MovieRentalContext"));
+
+            services.AddTransient<ICustomerRepository, CustomerRepository>();
+            services.AddTransient<IDirectorRepository, DirectorRepository>();
+            services.AddTransient<IMovieRepository, MovieRepository>();
+
             services.AddMvc();
         }
 
