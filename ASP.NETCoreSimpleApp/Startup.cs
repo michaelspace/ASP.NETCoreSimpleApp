@@ -56,6 +56,8 @@ namespace ASP.NETCoreSimpleApp
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            InitializeDb.InitializeData(app);
         }
     }
 }

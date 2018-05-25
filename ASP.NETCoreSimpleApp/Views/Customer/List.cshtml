@@ -1,0 +1,26 @@
+﻿@model IEnumerable<CustomerViewModel>
+
+<table class="table table-stripted table-hover" style="margin: 30px">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Rented movies count</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var customer in Model)
+    {
+        <tr>
+            <td>@customer.Customer.CustomerId</td>
+            <td>@customer.Customer.Name</td>
+            <td>@customer.MovieCount</td>
+            <td><a class="btn btn-default" asp-area="" asp-controller="Customer" asp-action="Update" asp-route-id="@customer.Customer.CustomerId">Edit</a></td>
+            <td><a class="btn btn-danger" asp-area="" asp-controller="Customer" asp-action="Delete" asp-route-id="@customer.Customer.CustomerId">Delete</a></td>
+        </tr>
+    }
+    </tbody>
+</table>
+<a class="btn btn-success mt-5" style="margin: 10px auto; display: table" asp-controller="Customer" asp-action="Create">Add new customer</a>
